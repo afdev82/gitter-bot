@@ -54,9 +54,9 @@ class GitterBot
     p [:message, @message] if @debug
     p "Target room = #{target_room}" if @debug
 
-    return if  ['text'].nil?
+    return if @message['text'].nil?
 
-    if @message['text'].downcase.include? 'tell a joke'
+    if @message['text'].downcase.match /tell a(?:nother)? joke/
       tell_a_joke(target_room)
     elsif @message['text'].downcase.start_with? 'gif'
       show_gif(target_room, @message['text'])
